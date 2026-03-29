@@ -160,30 +160,9 @@ it('cannot use floating with text suffix', function () {
     expect('<x-input label="Name" floating suffix="USD" />')->render();
 });
 
-it('can render with floating filled style')
-    ->expect('<x-input label="Name" floating floating-style="filled" />')
-    ->render()
-    ->toContain('peer')
-    ->toContain('rounded-t-md!')
-    ->toContain('border-b-2!')
-    ->toContain('bg-gray-50!');
+it('renders icon inside floating label when floating with icon', function () {
+    $html = expect('<x-input label="Name" floating icon="user" />')->render();
 
-it('can render with floating standard style')
-    ->expect('<x-input label="Name" floating floating-style="standard" />')
-    ->render()
-    ->toContain('peer')
-    ->toContain('border-b-2!')
-    ->toContain('bg-transparent!')
-    ->toContain('px-0!');
-
-it('can render with floating outlined style')
-    ->expect('<x-input label="Name" floating floating-style="outlined" />')
-    ->render()
-    ->toContain('peer')
-    ->toContain('bg-white');
-
-it('cannot use invalid floating style', function () {
-    $this->expectException(ViewException::class);
-
-    expect('<x-input label="Name" floating floating-style="invalid" />')->render();
+    $html->toContain('peer')
+        ->toContain('inline-flex items-center');
 });

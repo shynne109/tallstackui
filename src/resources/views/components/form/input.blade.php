@@ -28,7 +28,7 @@
             $customization['input.color.disabled'] => !$addon && ($attributes->get('disabled') || $attributes->get('readonly')),
             $customization['error'] => $error
         ])>
-        @if ($icon)
+        @if ($icon && !$floating)
             <div @class([$customization['icon.wrapper'], $customization['icon.paddings.' . $position]])>
                 <x-dynamic-component :component="TallStackUi::prefix('icon')"
                                      :$icon
@@ -77,8 +77,8 @@
                      $customization['floating.input'] => $floating,
                      $customization['input.paddings.prefix'] => $prefix && !$prefixed,
                      $customization['input.paddings.suffix'] => $suffix && !$suffixed,
-                     $customization['input.paddings.left'] => $icon && ($position === null || $position === 'left'),
-                     $customization['input.paddings.right'] => $icon && $position === 'right' || $icon && $clearable,
+                     $customization['input.paddings.left'] => !$floating && $icon && ($position === null || $position === 'left'),
+                     $customization['input.paddings.right'] => !$floating && ($icon && $position === 'right' || $icon && $clearable),
                      $customization['input.paddings.clearable'] => $icon && $clearable && $position === 'right',
                  ]) }}>
         @if ($floating && $label && is_string($label))
@@ -86,7 +86,16 @@
                 $customization['floating.label'],
                 $customization['floating.color'] => !$error,
                 $customization['floating.error'] => $error,
-            ])>{{ $label }}</label>
+            ])>
+                @if ($icon)
+                    <x-dynamic-component :component="TallStackUi::prefix('icon')"
+                                         :$icon
+                                         :$error
+                                         internal
+                                         @class([$customization['floating.icon']]) />
+                @endif
+                {{ $label }}
+            </label>
         @endif
         @if (!$suffixed)
             @if ($suffix instanceof \Illuminate\View\ComponentSlot)

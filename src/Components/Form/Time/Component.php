@@ -23,7 +23,6 @@ class Component extends TallStackUiComponent implements Customization
         public ComponentSlot|string|null $hint = null,
         public ?bool $invalidate = null,
         public ?bool $floating = null,
-        public string $floatingStyle = 'outlined',
         public ?bool $helper = null,
         public ?int $minHour = null,
         public ?int $maxHour = null,

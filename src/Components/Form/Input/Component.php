@@ -27,7 +27,6 @@ class Component extends TallStackUiComponent implements Customization
         public ?bool $invalidate = null,
         public ?bool $stripZeros = null,
         public ?bool $floating = null,
-        public string $floatingStyle = 'outlined',
         #[SkipDebug]
         public ?string $position = 'left',
         #[SkipDebug]
@@ -84,33 +83,15 @@ class Component extends TallStackUiComponent implements Customization
                 'size' => 'h-5 w-5',
                 'color' => 'hover:text-red-500',
             ],
-            'floating' => $this->floatingClasses(),
+            'floating' => [
+                'label' => 'inline-flex items-center absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1',
+                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
+                'icon' => 'w-4 h-4 me-1.5',
+                'input' => 'px-2.5! pt-4! pb-2.5!',
+                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
+            ],
             'error' => $this->error(),
         ]);
-    }
-
-    protected function floatingClasses(): array
-    {
-        return match ($this->floatingStyle) {
-            'filled' => [
-                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto',
-                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
-                'input' => 'rounded-t-md! rounded-b-none! border-0! border-b-2! border-gray-300! bg-gray-50! px-2.5! pt-5! pb-2.5! ring-0! focus:ring-0! focus:border-primary-600! dark:bg-dark-700! dark:border-dark-500! dark:focus:border-primary-500!',
-                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
-            ],
-            'standard' => [
-                'label' => 'absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto',
-                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
-                'input' => 'rounded-none! border-0! border-b-2! border-gray-300! bg-transparent! px-0! py-2.5! ring-0! focus:ring-0! focus:border-primary-600! dark:border-dark-500! dark:focus:border-primary-500!',
-                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
-            ],
-            default => [
-                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-dark-800 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1',
-                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
-                'input' => 'pt-3.5! pb-1.5!',
-                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
-            ],
-        };
     }
 
     protected function validate(): void
@@ -125,10 +106,6 @@ class Component extends TallStackUiComponent implements Customization
 
         if ($this->floating && (is_string($this->prefix) || is_string($this->suffix))) {
             __ts_validation_exception($this, 'The [floating] cannot be used with text [prefix] or [suffix]');
-        }
-
-        if ($this->floating && ! in_array($this->floatingStyle, ['outlined', 'filled', 'standard'])) {
-            __ts_validation_exception($this, 'The [floating-style] must be one of: outlined, filled, standard');
         }
     }
 }

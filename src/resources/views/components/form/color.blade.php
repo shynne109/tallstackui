@@ -27,7 +27,6 @@
                          :$hint
                          :$invalidate
                          :$floating
-                         :floating-style="$floatingStyle"
                          :alternative="$attributes->get('name')"
                          floatable
                          x-ref="input"

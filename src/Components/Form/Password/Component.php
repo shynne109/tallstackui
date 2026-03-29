@@ -27,7 +27,6 @@ class Component extends TallStackUiComponent implements Customization
         public ?bool $generator = null,
         public ?bool $invalidate = null,
         public ?bool $floating = null,
-        public string $floatingStyle = 'outlined',
         public ?bool $typingOnly = null,
         #[SkipDebug]
         public ?bool $simple = null,
