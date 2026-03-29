@@ -3,7 +3,7 @@
 > TallStackUI is a TALL Stack (Tailwind CSS, Alpine.js, Laravel, Livewire)
 > component library providing 65+ Blade components for building modern web interfaces.
 
-A tabbed interface component with underline-styled tab navigation and content panels. On mobile, tabs collapse to a select dropdown by default (unless scroll-on-mobile is enabled). Supports Livewire property binding and tab-change events.
+A tabbed interface component with underline-styled tab navigation and content panels. On mobile, tabs collapse to a select dropdown by default (unless scroll-on-mobile is enabled). Supports Livewire property binding, tab-change events, vertical direction, and pills variant.
 
 ## Basic Usage
 
@@ -44,6 +44,32 @@ With scroll on mobile and centered tabs:
 </x-tab>
 ```
 
+With vertical direction (sidebar-style tabs):
+
+```blade
+<x-tab selected="profile" direction="vertical">
+    <x-tab.items tab="profile" title="Profile">
+        <p>Profile content here.</p>
+    </x-tab.items>
+    <x-tab.items tab="settings" title="Settings">
+        <p>Settings content here.</p>
+    </x-tab.items>
+</x-tab>
+```
+
+With pills variant:
+
+```blade
+<x-tab selected="profile" variant="pills">
+    <x-tab.items tab="profile" title="Profile">
+        <p>Profile content here.</p>
+    </x-tab.items>
+    <x-tab.items tab="settings" title="Settings">
+        <p>Settings content here.</p>
+    </x-tab.items>
+</x-tab>
+```
+
 Listening for tab navigation events:
 
 ```blade
@@ -55,11 +81,13 @@ Listening for tab navigation events:
 
 ## Attributes
 
-| Attribute        | Type         | Default | Description                                                                  |
-|------------------|--------------|---------|------------------------------------------------------------------------------|
-| selected         | string\|null | null    | Initially selected tab identifier (or use `wire:model` for Livewire binding) |
-| scroll-on-mobile | bool\|null   | null    | Shows horizontal scrollable tabs on mobile instead of a select dropdown      |
-| centered         | bool\|null   | null    | Centers the tab navigation items                                             |
+| Attribute        | Type         | Default      | Description                                                                  |
+|------------------|--------------|--------------|------------------------------------------------------------------------------|
+| selected         | string\|null | null         | Initially selected tab identifier (or use `wire:model` for Livewire binding) |
+| scroll-on-mobile | bool\|null   | null         | Shows horizontal scrollable tabs on mobile instead of a select dropdown      |
+| centered         | bool\|null   | null         | Centers the tab navigation items (ignored when direction is `vertical`)      |
+| variant          | string       | `default`    | Tab style variant: `default` (underline) or `pills` (rounded filled)         |
+| direction        | string       | `horizontal` | Tab layout direction: `horizontal` or `vertical` (sidebar-style)             |
 
 ## Slots
 
@@ -155,14 +183,14 @@ TallStackUi::customize()
 
 ### Available Blocks
 
-| Block Name    | Purpose                                             |
-|---------------|-----------------------------------------------------|
-| base.wrapper  | Outer card container with background and shadow     |
-| base.padding  | Padding wrapper for the mobile select dropdown      |
-| base.body     | Flex container for the tab navigation list          |
-| base.content  | Content area padding and text color                 |
-| base.divider  | Horizontal divider between tabs and content         |
-| base.select   | Mobile select dropdown styling                      |
-| item.wrapper  | Individual tab item flex layout and padding         |
-| item.select   | Active/selected tab underline border and text color |
-| item.unselect | Inactive tab border and text color                  |
+| Block Name    | Purpose                                                                                                  |
+|---------------|----------------------------------------------------------------------------------------------------------|
+| base.wrapper  | Outer card container with background and shadow                                                          |
+| base.padding  | Padding wrapper for the mobile select dropdown                                                           |
+| base.body     | Flex container for the tab navigation list                                                               |
+| base.content  | Content area padding and text color                                                                      |
+| base.divider  | Horizontal divider between tabs and content (hidden for `pills` variant and `vertical` direction)        |
+| base.select   | Mobile select dropdown styling                                                                           |
+| item.wrapper  | Individual tab item flex layout and padding (varies by variant/direction)                                |
+| item.select   | Active tab styling: underline for default, left border for vertical, solid fill for pills                |
+| item.unselect | Inactive tab styling: transparent border for default/vertical, hover background for pills                |
