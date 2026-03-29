@@ -3,10 +3,12 @@
 @endphp
 
 <div>
-    @if ($label instanceof \Illuminate\View\ComponentSlot)
-        {{ $label }}
-    @elseif ($label && is_string($label))
-        <x-dynamic-component :component="TallStackUi::prefix('label')" scope="wrapper.input.label" :$id :$label :$error :$invalidate />
+    @if (!$floating)
+        @if ($label instanceof \Illuminate\View\ComponentSlot)
+            {{ $label }}
+        @elseif ($label && is_string($label))
+            <x-dynamic-component :component="TallStackUi::prefix('label')" scope="wrapper.input.label" :$id :$label :$error :$invalidate />
+        @endif
     @endif
     <div @if ($attributes->get('floatable', false)) x-ref="anchor" @endif class="{{ $customization['wrapper'] }}">
         {!! $slot !!}

@@ -113,3 +113,76 @@ it('auto selects tab when url matches', function () {
     expect($component)->render()
         ->toContain("selected = 'A'");
 });
+
+it('can render with vertical direction', function () {
+    $component = <<<'HTML'
+    <x-tab selected="A" direction="vertical">
+        <x-tab.items tab="A">
+            Foo
+        </x-tab.items>
+        <x-tab.items tab="B">
+            Bar
+        </x-tab.items>
+    </x-tab>
+    HTML;
+
+    expect($component)->render()
+        ->toContain('sm:flex-row', 'sm:flex-col', 'sm:min-w-[200px]', 'sm:border-r', 'border-l-2')
+        ->not->toContain('justify-center');
+});
+
+it('can render with pills variant', function () {
+    $component = <<<'HTML'
+    <x-tab selected="A" variant="pills">
+        <x-tab.items tab="A">
+            Foo
+        </x-tab.items>
+        <x-tab.items tab="B">
+            Bar
+        </x-tab.items>
+    </x-tab>
+    HTML;
+
+    expect($component)->render()
+        ->toContain('rounded-full', 'gap-2 p-2')
+        ->not->toContain('border-b-2');
+});
+
+it('does not render divider for pills variant', function () {
+    $component = <<<'HTML'
+    <x-tab selected="A" variant="pills">
+        <x-tab.items tab="A">
+            Foo
+        </x-tab.items>
+    </x-tab>
+    HTML;
+
+    expect($component)->render()
+        ->not->toContain('<hr');
+});
+
+it('does not render divider for vertical direction', function () {
+    $component = <<<'HTML'
+    <x-tab selected="A" direction="vertical">
+        <x-tab.items tab="A">
+            Foo
+        </x-tab.items>
+    </x-tab>
+    HTML;
+
+    expect($component)->render()
+        ->not->toContain('<hr');
+});
+
+it('does not apply centered when vertical', function () {
+    $component = <<<'HTML'
+    <x-tab selected="A" direction="vertical" centered>
+        <x-tab.items tab="A">
+            Foo
+        </x-tab.items>
+    </x-tab>
+    HTML;
+
+    expect($component)->render()
+        ->not->toContain('justify-center');
+});

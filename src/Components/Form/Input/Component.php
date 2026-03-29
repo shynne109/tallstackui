@@ -26,6 +26,7 @@ class Component extends TallStackUiComponent implements Customization
         public ?bool $clearable = null,
         public ?bool $invalidate = null,
         public ?bool $stripZeros = null,
+        public ?bool $floating = null,
         #[SkipDebug]
         public ?string $position = 'left',
         #[SkipDebug]
@@ -82,6 +83,12 @@ class Component extends TallStackUiComponent implements Customization
                 'size' => 'h-5 w-5',
                 'color' => 'hover:text-red-500',
             ],
+            'floating' => [
+                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-dark-800 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1',
+                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
+                'input' => 'pt-3.5! pb-1.5!',
+                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
+            ],
             'error' => $this->error(),
         ]);
     }
@@ -94,6 +101,10 @@ class Component extends TallStackUiComponent implements Customization
 
         if ($this->clearable && $this->suffix !== null) {
             __ts_validation_exception($this, 'The [clearable] cannot be used with [suffix]');
+        }
+
+        if ($this->floating && ($this->prefix !== null || $this->suffix !== null)) {
+            __ts_validation_exception($this, 'The [floating] cannot be used with [prefix] or [suffix]');
         }
     }
 }

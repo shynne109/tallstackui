@@ -19,6 +19,7 @@ class Component extends TallStackUiComponent implements Customization
         public ?bool $invalidate = null,
         public ?bool $error = false,
         public ?bool $clearable = null,
+        public ?bool $floating = null,
     ) {
         //
     }

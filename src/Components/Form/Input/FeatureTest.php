@@ -131,3 +131,30 @@ it('does not render addon wrapper for slot prefix without button attribute', fun
         ->toContain('<input')
         ->not->toContain('flex-none');
 });
+
+it('can render with floating label')
+    ->expect('<x-input label="Name" floating />')
+    ->render()
+    ->toContain('peer')
+    ->toContain('placeholder=" "')
+    ->toContain('Name');
+
+it('does not render normal label when floating', function () {
+    $html = expect('<x-input label="Name" floating />')->render();
+
+    $html->toContain('peer');
+
+    expect(substr_count($html->value, 'Name'))->toBe(1);
+});
+
+it('cannot use floating with prefix', function () {
+    $this->expectException(\Illuminate\View\ViewException::class);
+
+    expect('<x-input label="Name" floating prefix="$" />')->render();
+});
+
+it('cannot use floating with suffix', function () {
+    $this->expectException(\Illuminate\View\ViewException::class);
+
+    expect('<x-input label="Name" floating suffix="USD" />')->render();
+});

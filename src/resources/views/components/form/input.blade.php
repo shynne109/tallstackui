@@ -3,7 +3,7 @@
 @endphp
 
 <x-dynamic-component :component="TallStackUi::prefix('wrapper.input')" :$id :$property :$error :$label :$hint
-                     :$invalidate :floatable="$attributes->get('floatable', false)">
+                     :$invalidate :$floating :floatable="$attributes->get('floatable', false)">
     @if ($addon)
         <div @class([
             $customization['input.addon.wrapper'],
@@ -68,16 +68,26 @@
         <input @if ($id) id="{{ $id }}" @endif
         type="{{ $attributes->get('type', 'text') }}"
                x-ref="{{ $attributes->get('x-ref', $ref) }}"
+               @if ($floating) placeholder="{{ $attributes->get('placeholder', ' ') }}" @endif
                @if ($stripZeros) x-data="tallstackui_formInputStripZeros(@js($ref))" @endif
                @if ($prefix || $suffix) autocomplete="{{ $attributes->get('autocomplete', 'off') }}" @endif
                 {{ $attributes->class([
                      $customization['input.base'],
+                     'peer' => $floating,
+                     $customization['floating.input'] => $floating,
                      $customization['input.paddings.prefix'] => $prefix && !$prefixed,
                      $customization['input.paddings.suffix'] => $suffix && !$suffixed,
                      $customization['input.paddings.left'] => $icon && ($position === null || $position === 'left'),
                      $customization['input.paddings.right'] => $icon && $position === 'right' || $icon && $clearable,
                      $customization['input.paddings.clearable'] => $icon && $clearable && $position === 'right',
                  ]) }}>
+        @if ($floating && $label && is_string($label))
+            <label @if ($id) for="{{ $id }}" @endif @class([
+                $customization['floating.label'],
+                $customization['floating.color'] => !$error,
+                $customization['floating.error'] => $error,
+            ])>{{ $label }}</label>
+        @endif
         @if (!$suffixed)
             @if ($suffix instanceof \Illuminate\View\ComponentSlot)
                 <div {{ $suffix->attributes->merge(['class' => $customization['input.slot']]) }}>
