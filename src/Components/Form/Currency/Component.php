@@ -21,6 +21,7 @@ class Component extends TallStackUiComponent implements Customization
         public ComponentSlot|string|null $hint = null,
         public ?bool $clearable = null,
         public ?bool $invalidate = null,
+        public ?bool $floating = null,
         public ?string $locale = 'en-US',
         public ?int $decimals = 2,
         public ?int $precision = 4,

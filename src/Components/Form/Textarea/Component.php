@@ -25,6 +25,7 @@ class Component extends TallStackUiComponent implements Customization
         public ?bool $resize = false,
         public ?bool $resizeAuto = false,
         public ?bool $invalidate = null,
+        public ?bool $floating = null,
         public ?bool $count = false,
     ) {
         //
@@ -39,6 +40,12 @@ class Component extends TallStackUiComponent implements Customization
     {
         return Arr::dot([
             'input' => [...$this->input()],
+            'floating' => [
+                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-dark-800 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-5 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1',
+                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
+                'input' => 'pt-5! pb-1.5!',
+                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
+            ],
             'error' => $this->error(),
             'count' => [
                 'base' => 'dark:text-dark-400 absolute right-0 mt-1 text-sm text-gray-500',

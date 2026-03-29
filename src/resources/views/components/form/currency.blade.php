@@ -24,6 +24,7 @@
                          :$label
                          :$hint
                          :$invalidate
+                         :$floating
                          :alternative="$property"
                          x-on:input="sync"
                          x-model="input">

@@ -54,3 +54,21 @@ it('cannot use precision lower than decimals', function () {
     expect('<x-currency :decimals="3" :precision="2" />')
         ->render();
 });
+
+it('can render with floating label')
+    ->expect('<x-currency label="Amount" floating />')
+    ->render()
+    ->toContain('peer')
+    ->toContain('placeholder=" "')
+    ->toContain('Amount');
+
+it('can render with floating label and symbol', function () {
+    $component = <<<'HTML'
+    <x-currency label="Price" floating symbol />
+    HTML;
+
+    expect($component)->render()
+        ->toContain('peer')
+        ->toContain('Price')
+        ->toContain('$');
+});

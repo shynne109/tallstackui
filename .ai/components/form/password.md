@@ -3,7 +3,7 @@
 > TallStackUI is a TALL Stack (Tailwind CSS, Alpine.js, Laravel, Livewire)
 > component library providing 65+ Blade components for building modern web interfaces.
 
-A password input component with toggle visibility, strength indicator rules (minimum length, mixed case, numbers, symbols), password generator, and caps lock detection. Rules are displayed in a floating panel and validate as the user types.
+A password input component with toggle visibility, floating labels, strength indicator rules (minimum length, mixed case, numbers, symbols), password generator, and caps lock detection. Rules are displayed in a floating panel and validate as the user types.
 
 ## Basic Usage
 
@@ -26,6 +26,16 @@ A password input component with toggle visibility, strength indicator rules (min
 <x-password wire:model="password" label="Password" :rules="true" typing-only />
 ```
 
+With floating label:
+
+```blade
+<x-password wire:model="password" label="Password" floating />
+```
+
+```blade
+<x-password wire:model="password" label="Password" floating :rules="true" generator />
+```
+
 ## Attributes
 
 | Attribute   | Type                          | Default | Description                                                                                                                             |
@@ -36,6 +46,7 @@ A password input component with toggle visibility, strength indicator rules (min
 | mixed-case  | bool\|null                    | false   | When true, disables the caps lock indicator icon                                                                                        |
 | generator   | bool\|null                    | null    | Shows a password generator button that creates a random password matching the rules                                                     |
 | invalidate  | bool\|null                    | null    | Prevents displaying validation error messages for this input                                                                            |
+| floating    | bool\|null                    | null    | Enables floating label mode (label animates inside the input)                                                                           |
 | typing-only | bool\|null                    | null    | When true, the rules floating panel only appears while typing (not on focus)                                                            |
 
 ## Alpine.js Events

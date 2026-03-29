@@ -3,7 +3,7 @@
 > TallStackUI is a TALL Stack (Tailwind CSS, Alpine.js, Laravel, Livewire)
 > component library providing 65+ Blade components for building modern web interfaces.
 
-A versatile text input component with support for icons, prefix/suffix addons (text, slots, or buttons), clearable values, and automatic zero-stripping for numeric inputs.
+A versatile text input component with support for icons, prefix/suffix addons (text, slots, or buttons), clearable values, floating labels, and automatic zero-stripping for numeric inputs.
 
 ## Basic Usage
 
@@ -23,6 +23,16 @@ A versatile text input component with support for icons, prefix/suffix addons (t
 <x-input wire:model="website" label="Website" prefix="https://" suffix=".com" />
 ```
 
+With floating label:
+
+```blade
+<x-input wire:model="name" label="Name" floating />
+```
+
+```blade
+<x-input wire:model="email" label="Email" floating icon="envelope" />
+```
+
 ## Attributes
 
 | Attribute   | Type                        | Default | Description                                                  |
@@ -33,6 +43,7 @@ A versatile text input component with support for icons, prefix/suffix addons (t
 | clearable   | bool\|null                  | null    | Shows a clear button when the input has a value              |
 | invalidate  | bool\|null                  | null    | Prevents displaying validation error messages for this input |
 | strip-zeros | bool\|null                  | null    | Strips leading zeros from the input value                    |
+| floating    | bool\|null                  | null    | Enables floating label mode (label animates inside the input)|
 | position    | string\|null                | 'left'  | Icon position: 'left' or 'right'                             |
 | prefix      | string\|ComponentSlot\|null | null    | Prefix content (text string or slot with button/component)   |
 | suffix      | string\|ComponentSlot\|null | null    | Suffix content (text string or slot with button/component)   |
@@ -48,6 +59,7 @@ A versatile text input component with support for icons, prefix/suffix addons (t
 
 - The `icon` cannot be used with `prefix` or `suffix` at the same side (icon on left conflicts with prefix; icon on right conflicts with suffix).
 - The `clearable` cannot be used with `suffix`.
+- The `floating` cannot be used with text `prefix` or `suffix`. It can be used with ComponentSlot (addon mode) prefix/suffix.
 
 ## Soft Customization
 
@@ -92,4 +104,8 @@ TallStackUi::customize()
 | clearable.padding        | Clearable button padding                                 |
 | clearable.size           | Clearable icon dimensions                                |
 | clearable.color          | Clearable icon hover color                               |
+| floating.label           | Floating label positioning, transform, and transitions   |
+| floating.color           | Floating label text color and focus color                |
+| floating.input           | Input padding adjustments when floating is enabled       |
+| floating.error           | Floating label color in error state                      |
 | error                    | Error state ring and text styles                         |

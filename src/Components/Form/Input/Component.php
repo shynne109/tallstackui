@@ -103,8 +103,8 @@ class Component extends TallStackUiComponent implements Customization
             __ts_validation_exception($this, 'The [clearable] cannot be used with [suffix]');
         }
 
-        if ($this->floating && ($this->prefix !== null || $this->suffix !== null)) {
-            __ts_validation_exception($this, 'The [floating] cannot be used with [prefix] or [suffix]');
+        if ($this->floating && (is_string($this->prefix) || is_string($this->suffix))) {
+            __ts_validation_exception($this, 'The [floating] cannot be used with text [prefix] or [suffix]');
         }
     }
 }

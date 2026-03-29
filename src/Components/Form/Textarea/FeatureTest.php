@@ -45,3 +45,18 @@ it('can render with resize-auto')
     ->toContain('Bar baz')
     ->toContain('Foo bar')
     ->not->toContain('resize-none');
+
+it('can render with floating label')
+    ->expect('<x-textarea label="Description" floating />')
+    ->render()
+    ->toContain('peer')
+    ->toContain('placeholder=" "')
+    ->toContain('Description');
+
+it('does not render normal label when floating', function () {
+    $html = expect('<x-textarea label="Description" floating />')->render();
+
+    $html->toContain('peer');
+
+    expect(substr_count($html->value, 'Description'))->toBe(1);
+});

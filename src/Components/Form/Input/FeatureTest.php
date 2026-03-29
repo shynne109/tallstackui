@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\View\ViewException;
 use Tests\TestCase;
 
 uses(TestCase::class)->group('Feature');
@@ -147,14 +148,14 @@ it('does not render normal label when floating', function () {
     expect(substr_count($html->value, 'Name'))->toBe(1);
 });
 
-it('cannot use floating with prefix', function () {
-    $this->expectException(\Illuminate\View\ViewException::class);
+it('cannot use floating with text prefix', function () {
+    $this->expectException(ViewException::class);
 
     expect('<x-input label="Name" floating prefix="$" />')->render();
 });
 
-it('cannot use floating with suffix', function () {
-    $this->expectException(\Illuminate\View\ViewException::class);
+it('cannot use floating with text suffix', function () {
+    $this->expectException(ViewException::class);
 
     expect('<x-input label="Name" floating suffix="USD" />')->render();
 });

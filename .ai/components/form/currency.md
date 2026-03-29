@@ -3,7 +3,7 @@
 > TallStackUI is a TALL Stack (Tailwind CSS, Alpine.js, Laravel, Livewire)
 > component library providing 65+ Blade components for building modern web interfaces.
 
-A currency input component that formats numeric values with locale-aware decimal separators, configurable precision, optional currency/symbol display, and a clearable button. Built on top of the Input component with Alpine.js-powered real-time formatting.
+A currency input component that formats numeric values with locale-aware decimal separators, configurable precision, optional currency/symbol display, floating labels, and a clearable button. Built on top of the Input component with Alpine.js-powered real-time formatting.
 
 ## Basic Usage
 
@@ -23,6 +23,16 @@ A currency input component that formats numeric values with locale-aware decimal
             clearable />
 ```
 
+With floating label:
+
+```blade
+<x-currency wire:model="price" label="Price" floating />
+```
+
+```blade
+<x-currency wire:model="salary" label="Salary" floating symbol currency />
+```
+
 ## Attributes
 
 | Attribute  | Type                        | Default | Description                                                                           |
@@ -31,6 +41,7 @@ A currency input component that formats numeric values with locale-aware decimal
 | hint       | string\|ComponentSlot\|null | null    | Hint text displayed below the input                                                   |
 | clearable  | bool\|null                  | null    | Shows a clear button when the input has a value                                       |
 | invalidate | bool\|null                  | null    | Prevents displaying validation error messages for this input                          |
+| floating   | bool\|null                  | null    | Enables floating label mode (label animates inside the input)                         |
 | locale     | string\|null                | 'en-US' | Locale for number formatting (e.g., 'en-US', 'pt-BR', 'de-DE')                        |
 | decimals   | int\|null                   | 2       | Number of decimal places displayed                                                    |
 | precision  | int\|null                   | 4       | Maximum digit precision for internal value storage                                    |

@@ -3,7 +3,7 @@
 > TallStackUI is a TALL Stack (Tailwind CSS, Alpine.js, Laravel, Livewire)
 > component library providing 65+ Blade components for building modern web interfaces.
 
-A textarea component with optional manual resize, automatic height resizing, and a character counter that highlights when a maxlength limit is reached.
+A textarea component with optional manual resize, automatic height resizing, floating labels, and a character counter that highlights when a maxlength limit is reached.
 
 ## Basic Usage
 
@@ -23,6 +23,16 @@ A textarea component with optional manual resize, automatic height resizing, and
 <x-textarea wire:model="comment" label="Comment" count maxlength="500" />
 ```
 
+With floating label:
+
+```blade
+<x-textarea wire:model="bio" label="Bio" floating />
+```
+
+```blade
+<x-textarea wire:model="notes" label="Notes" floating resize-auto />
+```
+
 ## Attributes
 
 | Attribute   | Type                        | Default | Description                                                                    |
@@ -32,6 +42,7 @@ A textarea component with optional manual resize, automatic height resizing, and
 | resize      | bool\|null                  | false   | Enables manual resize handle on the textarea                                   |
 | resize-auto | bool\|null                  | false   | Enables automatic height adjustment as the user types                          |
 | invalidate  | bool\|null                  | null    | Prevents displaying validation error messages for this textarea                |
+| floating    | bool\|null                  | null    | Enables floating label mode (label animates inside the textarea)               |
 | count       | bool\|null                  | false   | Shows a character counter below the textarea (pair with `maxlength` attribute) |
 
 ## Validation Constraints
@@ -60,6 +71,10 @@ TallStackUi::customize()
 | input.color.base       | Default ring and text colors                      |
 | input.color.background | Background color for normal state                 |
 | input.color.disabled   | Background color for disabled/readonly state      |
-| error                  | Error state ring and text styles                  |
-| count.base             | Character counter text positioning and style      |
+| floating.label         | Floating label positioning, transform, and transitions |
+| floating.color         | Floating label text color and focus color              |
+| floating.input         | Textarea padding adjustments when floating is enabled  |
+| floating.error         | Floating label color in error state                    |
+| error                  | Error state ring and text styles                       |
+| count.base             | Character counter text positioning and style           |
 | count.max              | Character counter style when maxlength is reached |

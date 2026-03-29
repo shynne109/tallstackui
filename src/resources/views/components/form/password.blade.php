@@ -10,6 +10,7 @@
                          :$label
                          :$hint
                          :$invalidate
+                         :$floating
                          ::type="!show ? 'password' : 'text'"
                          floatable
                          autocomplete="{{ $attributes->get('autocomplete', 'off') }}"

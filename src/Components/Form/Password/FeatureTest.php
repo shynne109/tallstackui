@@ -47,3 +47,18 @@ it('can render with rules using default', function () {
         ->toContain(trans('ts-ui::messages.password.rules.formats.numbers'))
         ->toContain(trans('ts-ui::messages.password.rules.formats.mixed'));
 });
+
+it('can render with floating label')
+    ->expect('<x-password label="Secret" floating />')
+    ->render()
+    ->toContain('peer')
+    ->toContain('placeholder=" "')
+    ->toContain('Secret');
+
+it('does not render normal label when floating', function () {
+    $html = expect('<x-password label="Secret" floating />')->render();
+
+    $html->toContain('peer');
+
+    expect(substr_count($html->value, 'Secret'))->toBe(1);
+});
