@@ -100,7 +100,7 @@ class Component extends TallStackUiComponent implements Customization
                 'side' => 'min-w-72',
             ],
             'floatingLabel' => [
-                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] px-2 start-1',
+                'label' => 'absolute text-sm duration-300 transform -translate-y-3 scale-[0.85] top-0.5 z-10 origin-[0] bg-white dark:bg-dark-800 px-2 start-1',
                 'color' => 'text-gray-500 dark:text-dark-400',
                 'input' => 'px-2.5! pt-4! pb-2.5!',
                 'error' => 'text-red-600 dark:text-red-500',
