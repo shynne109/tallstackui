@@ -25,6 +25,7 @@
                          :$hint
                          :$invalidate
                          :$floating
+                         :floating-style="$floatingStyle"
                          :alternative="$property"
                          x-on:input="sync"
                          x-model="input">

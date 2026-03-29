@@ -7,7 +7,7 @@
 @endif
 
 <x-dynamic-component :component="TallStackUi::prefix('wrapper.input')" :$id :$property :$error :$label :$hint
-                     :$invalidate>
+                     :$invalidate :$floating>
     <div x-data="tallstackui_formTag({!! $entangle !!}, @js($limit), @js($prefix), @js($livewire), @js($property), @js($value))"
          x-cloak
          x-on:click="$refs.input.focus()"
@@ -49,6 +49,13 @@
                    x-ref="input"
                    enterkeyhint="done">
         </div>
+        @if ($floating && $label && is_string($label))
+            <label @if ($id) for="{{ $id }}" @endif @class([
+                $customization['floating.label'],
+                $customization['floating.color'] => !$error,
+                $customization['floating.error'] => $error,
+            ]) x-show="!model || model.length === 0" x-transition>{{ $label }}</label>
+        @endif
         <button type="button"
                 x-on:click.prevent="erase()"
                 x-show="model?.length > 0"

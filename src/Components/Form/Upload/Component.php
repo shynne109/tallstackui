@@ -24,6 +24,8 @@ class Component extends TallStackUiComponent implements Customization
     public function __construct(
         public ComponentSlot|string|null $label = null,
         public ComponentSlot|string|null $hint = null,
+        public ?bool $floating = null,
+        public string $floatingStyle = 'outlined',
         public ComponentSlot|string|null $tip = null,
         public ?bool $multiple = false,
         public ?bool $preview = true,

@@ -24,7 +24,8 @@ class Component extends TallStackUiComponent implements Customization
         public ComponentSlot|string|null $hint = null,
         public ?string $prefix = null,
         public ?int $limit = null,
-        public ?bool $invalidate = null
+        public ?bool $invalidate = null,
+        public ?bool $floating = null
     ) {
         //
     }
@@ -49,6 +50,11 @@ class Component extends TallStackUiComponent implements Customization
             'button' => [
                 'wrapper' => 'text-secondary-500 dark:text-dark-400 absolute inset-y-0 right-2 flex cursor-pointer items-center',
                 'icon' => 'h-5 w-5 hover:text-red-500',
+            ],
+            'floating' => [
+                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-dark-800 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1',
+                'color' => 'text-gray-500 dark:text-dark-400 peer-focus:text-primary-600 dark:peer-focus:text-primary-500',
+                'error' => 'text-red-600 peer-focus:text-red-600 dark:text-red-500',
             ],
             'error' => $this->error(),
         ]);

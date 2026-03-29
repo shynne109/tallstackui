@@ -37,15 +37,23 @@
     @if ($request['params'] ?? null)
         <div hidden x-ref="params">{{ TallStackUi::blade()->json($request['params']) }}</div>
     @endif
-    @if ($label && !$side)
+    @if ($label && !$side && !$floating)
         <x-dynamic-component :component="TallStackUi::prefix('label')" scope="form.select-styled.label" :$label :$error />
     @endif
     <div class="relative" x-on:click.outside="show = false">
+        @if ($floating && $label && is_string($label))
+            <label @class([
+                $customization['floatingLabel.label'],
+                $customization['floatingLabel.color'] => !$error,
+                $customization['floatingLabel.error'] => $error,
+            ])>{{ $label }}</label>
+        @endif
         <button type="button"
                 x-ref="button"
                 @disabled($disabled)
                 @class([
                     $customization['input.wrapper.base'],
+                    $customization['floatingLabel.input'] => $floating,
                     $customization['input.wrapper.color'] => !$error,
                     $customization['input.wrapper.error'] => $error,
                     $customization['input.wrapper.round.left'] => $side === 'left',

@@ -11,6 +11,7 @@
                          :$hint
                          :$invalidate
                          :$floating
+                         :floating-style="$floatingStyle"
                          ::type="!show ? 'password' : 'text'"
                          floatable
                          autocomplete="{{ $attributes->get('autocomplete', 'off') }}"

@@ -3,7 +3,7 @@
 @endphp
 
 <x-dynamic-component :component="TallStackUi::prefix('wrapper.input')" :$id :$property :$error :$label :$hint
-                     :$invalidate>
+                     :$invalidate :$floating>
     <div @class([
             $customization['input.wrapper'],
             $customization['input.color.base'] => !$error,
@@ -20,8 +20,11 @@
                    @if ($max) max="{{ $max }}" @endif
                    @if ($step) step="{{ $step }}" @endif
                    @if ($selectable) x-on:keydown="$event.preventDefault()" @endif
+                   @if ($floating) placeholder="{{ $attributes->get('placeholder', ' ') }}" @endif
                    {{ $attributes->class([
                         $customization['input.base'],
+                        'peer' => $floating,
+                        $customization['floating.input'] => $floating,
                         'text-center' => $centralized,
                         'caret-transparent' => $selectable,
                         'appearance-number-none'
@@ -29,6 +32,13 @@
                    dusk="tallstackui_form_number_input"
                    x-on:blur="validate()"
                    x-ref="input">
+            @if ($floating && $label && is_string($label))
+                <label @if ($id) for="{{ $id }}" @endif @class([
+                    $customization['floating.label'],
+                    $customization['floating.color'] => !$error,
+                    $customization['floating.error'] => $error,
+                ])>{{ $label }}</label>
+            @endif
             <button @if (!$attributes->get('disabled', $attributes->get('readonly', false))) x-on:click="decrement()"
                     @endif
                     x-on:mousedown="interval = setInterval(() => decrement(), delay * 100);"

@@ -27,6 +27,7 @@ class Component extends TallStackUiComponent implements Customization
         public ?string $select = null,
         public ?array $selectable = [],
         public ?bool $invalidate = null,
+        public ?bool $floating = null,
         public ?bool $grouped = null,
     ) {
         //
@@ -48,6 +49,12 @@ class Component extends TallStackUiComponent implements Customization
                     'right' => 'rounded-l-none!',
                 ],
                 'borderless' => 'ring-0! focus:ring-0!',
+            ],
+            'floating' => [
+                'label' => 'absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-dark-800 px-2 start-1',
+                'color' => 'text-gray-500 dark:text-dark-400',
+                'input' => 'pt-3.5! pb-1.5!',
+                'error' => 'text-red-600 dark:text-red-500',
             ],
             'error' => $this->error('focus:ring-2'),
         ]);

@@ -24,7 +24,10 @@
     <x-dynamic-component :component="TallStackUi::prefix('input')"
                          scope="form.upload.input"
                          :value="$placeholder"
+                         :$label
                          :$hint
+                         :$floating
+                         :floating-style="$floatingStyle"
                          x-on:click="show = !show"
                          x-ref="input"
                          class="cursor-pointer caret-transparent"
